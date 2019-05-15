@@ -424,13 +424,14 @@ enum HAPI_NodeType
     HAPI_NODETYPE_NONE      = 0,
     HAPI_NODETYPE_OBJ       = 1 << 0,
     HAPI_NODETYPE_SOP       = 1 << 1,
-    HAPI_NODETYPE_CHOP      = 1 << 2,
-    HAPI_NODETYPE_ROP       = 1 << 3,
-    HAPI_NODETYPE_SHOP      = 1 << 4,
-    HAPI_NODETYPE_COP       = 1 << 5,
-    HAPI_NODETYPE_VOP       = 1 << 6,
-    HAPI_NODETYPE_DOP       = 1 << 7,
-    HAPI_NODETYPE_TOP       = 1 << 8
+    HAPI_NODETYPE_POP       = 1 << 2,
+    HAPI_NODETYPE_CHOP      = 1 << 3,
+    HAPI_NODETYPE_ROP       = 1 << 4,
+    HAPI_NODETYPE_SHOP      = 1 << 5,
+    HAPI_NODETYPE_COP       = 1 << 6,
+    HAPI_NODETYPE_VOP       = 1 << 7,
+    HAPI_NODETYPE_DOP       = 1 << 8,
+    HAPI_NODETYPE_TOP       = 1 << 9
 };
 HAPI_C_ENUM_TYPEDEF( HAPI_NodeType )
 typedef int HAPI_NodeTypeBits;
@@ -458,11 +459,7 @@ enum HAPI_NodeFlags
 
     /// SOP Node Specific Flags
     HAPI_NODEFLAGS_SOP_CURVE    = 1 << 11, ///< Looks for "curve".
-    HAPI_NODEFLAGS_SOP_GUIDE    = 1 << 12,  ///< Looks for Guide Geometry
-
-    /// TOP Node Specific Flags
-    HAPI_NODEFLAGS_TOP_NONSCHEDULER = 1 << 13	/// All TOP nodes except schedulers
-
+    HAPI_NODEFLAGS_SOP_GUIDE    = 1 << 12  ///< Looks for Guide Geometry
 };
 HAPI_C_ENUM_TYPEDEF( HAPI_NodeFlags )
 typedef int HAPI_NodeFlagsBits;
@@ -799,7 +796,6 @@ enum HAPI_PDG_WorkitemState
     HAPI_PDG_WORKITEM_SCHEDULED,
     HAPI_PDG_WORKITEM_COOKING,
     HAPI_PDG_WORKITEM_COOKED_SUCCESS,
-    HAPI_PDG_WORKITEM_COOKED_CACHE,
     HAPI_PDG_WORKITEM_COOKED_FAIL,
     HAPI_PDG_WORKITEM_COOKED_CANCEL,
     HAPI_PDG_WORKITEM_DIRTY
@@ -948,16 +944,6 @@ struct HAPI_API HAPI_CookOptions
     /// and therefore geos will be split by group and primitive type. If
     /// set to false, geos will only be split by primitive type.
     HAPI_Bool splitGeosByGroup;
-
-    /// This toggle lets you enable the splitting by unique values
-    /// of a specified attribute. By default, this is false and
-    /// the geo be split as described above.
-    /// as described above. If this is set to true, and  splitGeosByGroup
-    /// set to false, mesh geos will be split on attribute values
-    /// The attribute name to split on must be created with HAPI_SetCustomString
-    /// and then the splitAttrSH handle set on the struct.
-    HAPI_Bool splitGeosByAttribute;
-    HAPI_StringHandle splitAttrSH;
 
     /// For meshes only, this is enforced by convexing the mesh. Use -1
     /// to avoid convexing at all and get some performance boost.

@@ -32,9 +32,11 @@
 
 /*
 
-    Houdini Version: 17.5.251
-    Houdini Engine Version: 3.2.41
-    Unreal Version: 4.22.1
+    Houdini Version: 17.0.352
+    Houdini Engine Version: 3.2.37
+    Unreal Version: 4
+.21
+.2
 
 */
 
@@ -46,7 +48,7 @@ public class HoudiniEngineRuntime : ModuleRules
 {
     private string GetHFSPath()
     {
-        string HoudiniVersion = "17.5.251";
+        string HoudiniVersion = "17.0.352";
         bool bIsRelease = true;
         string HFSPath = "";
         string RegistryPath = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Side Effects Software";
@@ -75,7 +77,7 @@ public class HoudiniEngineRuntime : ModuleRules
             }
 
             // If we couldn't find the Houdini Engine registry path, try the default one
-            string DefaultHPath = "C:/Program Files/Side Effects Software/Houdini Engine " + HoudiniVersion;
+            string DefaultHPath = "D:/Program Files/Side Effects Software/Houdini Engine " + HoudiniVersion;
             if ( DefaultHPath != HPath )
             {
                 Log = string.Format("Houdini Engine : Looking for Houdini Engine {0} in {1}", HoudiniVersion, DefaultHPath );
@@ -96,7 +98,7 @@ public class HoudiniEngineRuntime : ModuleRules
             }
 
             // If we couldn't find the Houdini registry path, try the default one
-            DefaultHPath = "C:/Program Files/Side Effects Software/Houdini " + HoudiniVersion;
+            DefaultHPath = "D:/Program Files/Side Effects Software/Houdini " + HoudiniVersion;
             if ( DefaultHPath != HPath )
             {
                 Log = string.Format("Houdini Engine : Looking for Houdini {0} in {1}", HoudiniVersion, DefaultHPath );
@@ -122,9 +124,6 @@ public class HoudiniEngineRuntime : ModuleRules
                     Log = string.Format("Houdini Engine : Found Active Houdini Engine version: {0}", ActiveHEngine );
                     System.Console.WriteLine( Log );
                     
-                    // Active version contain the patch version that we need to strip off
-                    //string[] ActiveVersion = ActiveHEngine.Split(".");
-
                     HEngineRegistry = RegistryPath + string.Format(@"\Houdini Engine {0}", ActiveHEngine);
                     HPath = Microsoft.Win32.Registry.GetValue(HEngineRegistry, "InstallPath", null) as string;
                     if ( HPath != null )

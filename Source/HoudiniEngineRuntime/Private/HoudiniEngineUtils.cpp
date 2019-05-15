@@ -1588,8 +1588,6 @@ FHoudiniEngineUtils::HapiCreateCurveInputNodeForData(
     CookOptions.clearErrorsAndWarnings = false;
     CookOptions.maxVerticesPerPrimitive = -1;
     CookOptions.splitGeosByGroup = false;
-    CookOptions.splitGeosByAttribute = false;
-    CookOptions.splitAttrSH = 0;
     CookOptions.handleBoxPartTypes = false;
     CookOptions.handleSpherePartTypes = false;
     CookOptions.packedPrimInstancingMode = HAPI_PACKEDPRIM_INSTANCING_MODE_FLAT;
